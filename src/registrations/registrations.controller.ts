@@ -51,7 +51,7 @@ export class RegistrationsController {
     }
 
     else {
-      const obj = { valid: "Yes", name: fullname, type: "Student", id: "s" + sid }
+      const obj = { valid: "No", name: fullname, type: "Student", id: "s" + sid }
       return obj
     }
 
