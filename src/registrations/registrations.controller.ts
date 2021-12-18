@@ -5,7 +5,7 @@ import { UpdateRegistrationDto } from './dto/update-registration.dto';
 
 @Controller('registrations')
 export class RegistrationsController {
-  constructor(private readonly registrationsService: RegistrationsService) {}
+  constructor(private readonly registrationsService: RegistrationsService) { }
 
   @Post()
   create(@Body() createRegistrationDto: CreateRegistrationDto) {
@@ -34,10 +34,27 @@ export class RegistrationsController {
 
   @Get('verify/:id')
   verfiy(@Param('id') id: string) {
-    let idn =  parseInt(id)
-    if (idn%2 ===0)
-    return JSON.parse(`{"valid": "Yes", "name: "Dinh Ngoc Minh", "type": "Staff", "id": "v175923"}`)
-    else 
-    return JSON.parse(`{"valid": "No", "name: "Hoang Ngoc Le", "type": "Student", "id": "s175923"}`)
+
+    const fname = ["Anh", "Phuong", "Trang", "Thao", "Ha", "Hien"]
+    const lname = ["Nguyen", "Tran", "Le", "Phan", "Trinh", "Dinh"]
+
+    let fullname = fname[Math.floor(Math.random() * 5)] + " " + lname[Math.floor(Math.random() * 5)]
+
+    let sid = Math.floor(Math.random() * 1000000)
+
+    let idn = parseInt(id)
+
+
+    if (idn % 2 === 0) {
+      const obj = { valid: "Yes", name: fullname, type: "Staff", id: "v" + sid }
+      return obj
+    }
+
+    else {
+      const obj = { valid: "Yes", name: fullname, type: "Student", id: "s" + sid }
+      return obj
+    }
+
+
   }
 }
